@@ -1,0 +1,25 @@
+{
+  "name": "@openipc/web-components",
+  "version": "1.0.0",
+  "description": "Base OpenIPC web ecosystem header",
+  "main": "index.ts",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openipc/web-components.git"
+  },
+  "keywords": [
+    "openipc",
+    "web",
+    "sites",
+    "header"
+  ],
+  "author": "Yar Bash <yarbdev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/openipc/web-components/issues"
+  },
+  "homepage": "https://github.com/openipc/web-components#readme"
+}
