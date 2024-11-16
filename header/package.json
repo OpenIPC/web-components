@@ -1,5 +1,5 @@
 {
-  "name": "@openipc/web-components",
+  "name": "@openipc/header",
   "version": "1.0.0",
   "description": "Base OpenIPC web ecosystem header",
   "main": "index.ts",
