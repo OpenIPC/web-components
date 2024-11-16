@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/openipc/web-components/issues"
   },
-  "homepage": "https://github.com/openipc/web-components#readme"
+  "homepage": "https://github.com/openipc/web-components#readme",
+  "publishConfig": {
+    "@openipc:registry": "https://npm.pkg.github.com"
+  }
 }
