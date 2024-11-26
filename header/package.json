@@ -1,6 +1,10 @@
 {
   "name": "@openipc/header",
+<<<<<<< HEAD
   "version": "0.0.1",
+=======
+  "version": "0.0.2",
+>>>>>>> dev
   "description": "Base OpenIPC web ecosystem header",
   "main": "index.ts",
   "scripts": {
