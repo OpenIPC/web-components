@@ -17,10 +17,13 @@ jobs:
           node-version: 21
       - name: Build package
         run: |
+          pwd
+          ls
+          ls dist
           npm ci
           npm run lint
           npm run build
-      - name: Get package articfact
+      - name: Upload package articfact
         uses: actions/upload-artifact@v4
         with:
           name: header-build
