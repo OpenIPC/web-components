@@ -17,13 +17,9 @@ jobs:
           node-version: 21
       - name: Build package
         run: |
-          pwd
-          ls
           npm ci
           npm run lint
           npm run build
-          ls
-          ls dist
       - name: Upload package articfact
         uses: actions/upload-artifact@v4
         with:
@@ -47,10 +43,11 @@ jobs:
           name: header-build
       - run: |
           pwd
-          mkdir ../header/dist
-          cp * ../header/dist/
-          cd header
-          npm ci
-          npm publish
+          ls
+          #mkdir ../header/dist
+          #cp * ../header/dist/
+          #cd header
+          #npm ci
+          #npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
