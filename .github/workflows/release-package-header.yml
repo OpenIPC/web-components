@@ -7,15 +7,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./header
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
-      - run: npm ci
-      - run: npm test
-
-  publish-gpr:
+          node-version: 21
+      - name: Build package
+        run: |
+        npm ci
+        npm lint
+        npm build
+      - name: Get package articfact
+        uses: actions/upload-artifact@v4
+        width:
+          name: header-build
+          path: dist
+  publish:
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -25,9 +35,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 21
           registry-url: https://npm.pkg.github.com/
+      - name: Download package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: header-build
       - run: |
+          pwd
+          mkdir ../header/dist
+          cp * ../header/dist/
           cd header
           npm ci
           npm publish
