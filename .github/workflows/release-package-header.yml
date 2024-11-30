@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: header-build
-          path: dist
+          path: ./header/dist
   publish:
     needs: build
     runs-on: ubuntu-latest
