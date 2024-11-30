@@ -22,7 +22,7 @@ jobs:
           npm build
       - name: Get package articfact
         uses: actions/upload-artifact@v4
-        width:
+        with:
           name: header-build
           path: dist
   publish:
