@@ -41,13 +41,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: header-build
+          path: header/dist
       - run: |
-          pwd
-          ls
-          #mkdir ../header/dist
-          #cp * ../header/dist/
-          #cd header
-          #npm ci
-          #npm publish
+          cd header
+          npm ci
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
