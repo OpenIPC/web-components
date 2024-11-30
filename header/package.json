@@ -12,7 +12,7 @@
   },
   "scripts": {
     "lint": "tsc",
-    "build": "tsc"
+    "build": "tsup"
   },
   "repository": "https://github.com/openipc/web-components",
   "keywords": [
