@@ -1,6 +1,6 @@
 {
   "name": "@openipc/header",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Base OpenIPC web ecosystem header",
   "types": "./dist/index.d.ts",
   "type": "module",
