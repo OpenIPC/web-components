@@ -1,12 +1,16 @@
 {
   "name": "@openipc/header",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Base OpenIPC web ecosystem header",
   "types": "./dist/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/index.css": {
+      "import": "./dist/index.css"
     }
   },
   "scripts": {
