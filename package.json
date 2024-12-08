@@ -3,7 +3,9 @@
   "description": "OpenIPC web components",
   "version": "0.0.1",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,19 @@
     "url": "https://github.com/openipc/web-components/issues"
   },
   "homepage": "https://github.com/openipc/web-components",
-  "packageManager": "yarn@4.5.3"
+  "packageManager": "yarn@4.5.3",
+  "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/preact": "^8.4.7",
+    "@storybook/preact-vite": "^8.4.7",
+    "@storybook/test": "^8.4.7",
+    "vite": "^6.0.3"
+  },
+  "dependencies": {
+    "preact": "^10.25.1",
+    "storybook": "^8.4.7"
+  }
 }
