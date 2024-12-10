@@ -20,6 +20,7 @@ jobs:
           npm ci
           npm run lint
           npm run build
+          # yarn exec tsup src/header/src/index.ts --format esm --dts --outDir ./src/header/dist/ --clean
       - name: Upload package articfact
         uses: actions/upload-artifact@v4
         with:
