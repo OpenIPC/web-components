@@ -1,2 +1,2 @@
-import '../global.css';
+import '../../../global.css';
 export { default } from './Header';
