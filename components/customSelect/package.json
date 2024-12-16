@@ -1,0 +1,34 @@
+{
+  "name": "@openipc/header",
+  "version": "0.0.1",
+  "description": "Base OpenIPC web ecosystem custom select",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/index.css": {
+      "import": "./dist/index.css"
+    }
+  },
+  "repository": "https://github.com/openipc/web-components",
+  "keywords": [
+    "openipc",
+    "web",
+    "sites",
+    "select"
+  ],
+  "author": "Yar Bash <yarbdev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/openipc/web-components/issues"
+  },
+  "homepage": "https://github.com/openipc/web-components#readme",
+  "publishConfig": {
+    "@openipc:registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "preact": "^10.25.0"
+  }
+}
