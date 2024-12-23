@@ -3,7 +3,7 @@ import CustomSelect from './CustomSelect';
 
 const meta = {
   component: CustomSelect,
-  title: 'Design System/UI/CustomSelect',
+  title: 'UI/CustomSelect',
   argTypes: {
     open: {
       control: 'boolean',
