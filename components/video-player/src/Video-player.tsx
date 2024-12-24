@@ -1,23 +1,38 @@
 import type { PlayerProps } from './video-player-types';
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
+import useStream from './useStream';
 
-export default function OIPCVideoPlayer({ src, mode }: PlayerProps) {
+const OIPCVideoPlayer = ({ stream, server, mode }: PlayerProps) => {
   const [ paused, setPaused ] = useState(true);
   const [ muted, setMuted ] = useState(true);
   const [ fulled, setFulled ] = useState(false); 
   const [ finite, setFinite ] = useState(false);
 
+  const [ onConnect ] = useStream({ stream, server, mode });
+
+  useEffect(() => {
+    onConnect();
+  });
+
   const timeStamp = '1:35:12 / 2:44:58';
 
+  const handlePlayBtnClick = () => {
+    setPaused(!paused);
+  }
+
   return (
-    <div className="w-full relative group min-h-[400px] bg-black overflow-hidden">
+    <div className="w-full relative group aspect-video bg-black overflow-hidden">
+      <figure className="w-full aspect-video">
+        <video className="w-full aspect-video">
+        </video>
+      </figure>
       <div className="min-h-14 w-full px-2 pt-3 bg-[#9e9e9e40] absolute bottom-[-56px] flex flex-col gap-y-2 transition-bottom duration-300 ease-linear group-hover:bottom-0">
         <div className="bg-white h-2 w-full">
           <div className="h-full w-10 bg-[#283593]">
           </div>
         </div>
         <div className="flex flex-row">
-          <div className="w-min">
+          <div className="w-min cursor-pointer" onClick={handlePlayBtnClick}>
             {
               paused
                 ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="#fff"><path d="M8,5.14V19.14L19,12.14L8,5.14Z"/></svg>
@@ -52,3 +67,5 @@ export default function OIPCVideoPlayer({ src, mode }: PlayerProps) {
     </div>
   );
 }
+
+export default OIPCVideoPlayer;
