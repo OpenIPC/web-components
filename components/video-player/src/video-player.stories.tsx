@@ -9,9 +9,12 @@ const meta = {
       control: 'select',
       options: ['83e6276dc44186f55ccf8f36a1c0892e83705253'],
     },
-    server: {
+server: {
       control: 'select',
       options: ['89.104.68.154'],
+    },
+    live: {
+      control: 'boolean',
     },
   },
 } satisfies Meta<typeof OIPCVideoPlayer>;

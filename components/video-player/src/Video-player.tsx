@@ -2,7 +2,7 @@ import type { PlayerProps } from './video-player-types';
 import { useState, useEffect } from 'preact/hooks';
 import useStream from './useStream';
 
-const OIPCVideoPlayer = ({ stream, server, mode }: PlayerProps) => {
+const OIPCVideoPlayer = ({ stream, server, mode, live }: PlayerProps) => {
   const [ paused, setPaused ] = useState(true);
   const [ muted, setMuted ] = useState(true);
   const [ fulled, setFulled ] = useState(false); 
@@ -12,7 +12,7 @@ const OIPCVideoPlayer = ({ stream, server, mode }: PlayerProps) => {
 
   useEffect(() => {
     onConnect();
-  });
+  }, []);
 
   const timeStamp = '1:35:12 / 2:44:58';
 
@@ -26,12 +26,14 @@ const OIPCVideoPlayer = ({ stream, server, mode }: PlayerProps) => {
         <video className="w-full aspect-video">
         </video>
       </figure>
-      <div className="min-h-14 w-full px-2 pt-3 bg-[#9e9e9e40] absolute bottom-[-56px] flex flex-col gap-y-2 transition-bottom duration-300 ease-linear group-hover:bottom-0">
-        <div className="bg-white h-2 w-full">
-          <div className="h-full w-10 bg-[#283593]">
+      <div className="w-full px-2 bg-[#9e9e9e40] absolute bottom-[-56px] flex flex-col transition-bottom duration-300 ease-linear group-hover:bottom-0">
+        { !live &&
+          <div className="bg-white h-2 w-full mt-2">
+            <div className="h-full w-10 bg-[#283593]">
+            </div>
           </div>
-        </div>
-        <div className="flex flex-row">
+        }
+        <div className="flex flex-row items-center py-1">
           <div className="w-min cursor-pointer" onClick={handlePlayBtnClick}>
             {
               paused
@@ -39,9 +41,15 @@ const OIPCVideoPlayer = ({ stream, server, mode }: PlayerProps) => {
                 : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="#fff"><path d="M14,19H18V5H14M6,19H10V5H6V19Z" /></svg>
             }
           </div>
+          {
+            live &&
+              <div>
+                <span className="font-bold pl-1 text-white align-middle">LIVE</span>
+              </div>
+          }
           <div className="ml-auto flex flex-row gap-x-2">
             <div className="text-white text-sm">
-              <span>{timeStamp}</span>
+              <span className="align-middle">{timeStamp}</span>
             </div>
             <div className="w-min flex flex-row items-center gap-x-[2px]">
               {
