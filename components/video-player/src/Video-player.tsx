@@ -1,14 +1,16 @@
 import type { PlayerProps } from './video-player-types';
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect, useRef } from 'preact/hooks';
 import useStream from './useStream';
 
-const OIPCVideoPlayer = ({ stream, server, mode, live }: PlayerProps) => {
+const OIPCVideoPlayer = ({ stream, server, live }: PlayerProps) => {
   const [ paused, setPaused ] = useState(true);
   const [ muted, setMuted ] = useState(true);
   const [ fulled, setFulled ] = useState(false); 
   const [ finite, setFinite ] = useState(false);
+  
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [ onConnect ] = useStream({ stream, server, mode });
+  const [ onConnect ] = useStream(stream, server, videoRef);
 
   useEffect(() => {
     onConnect();
@@ -23,7 +25,7 @@ const OIPCVideoPlayer = ({ stream, server, mode, live }: PlayerProps) => {
   return (
     <div className="w-full relative group aspect-video bg-black overflow-hidden">
       <figure className="w-full aspect-video">
-        <video className="w-full aspect-video">
+        <video className="w-full aspect-video" ref={videoRef}>
         </video>
       </figure>
       <div className="w-full px-2 bg-[#9e9e9e40] absolute bottom-[-56px] flex flex-col transition-bottom duration-300 ease-linear group-hover:bottom-0">
