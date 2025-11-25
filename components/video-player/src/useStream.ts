@@ -1,5 +1,6 @@
 import {RefObject} from 'preact';
-import type { PlayerProps, Mode } from './video-player-types';
+import type { Mode, Msg } from './video-player-types';
+import { useState } from 'preact/hooks';
 
 const CODECS = [
   'avc1.640029',      // H.264 high 4.1 (Chromecast 1st and 2nd Gen)
@@ -20,11 +21,15 @@ const useStream = (stream: string, server: string, videoRef: RefObject<HTMLVideo
   let wsState: number = WebSocket.CLOSED; 
   // WebSocket Time Stamp
   let wsTS = 0;
-  let onmessage = <Record<Mode, (msg: string) => void>>{};
-  let ondata = null;
+  let onmessage = <Record<Mode, (msg: Msg) => void>>{};
+  let ondata: ((data: ArrayBuffer) => void) | null = null;
   let mseCodecs = '';
 
-  const onConnect = () => {
+  const [ paused, setPaused ] = useState(true);
+
+  const connect = () => {
+    videoRef.current!.addEventListener('pause', () => setPaused(true));
+    videoRef.current!.addEventListener('play', () => setPaused(false));
     wsState = WebSocket.CONNECTING;
     wsTS = Date.now();
     ws = new WebSocket(wsURL);
@@ -41,17 +46,16 @@ const useStream = (stream: string, server: string, videoRef: RefObject<HTMLVideo
     wsState = WebSocket.OPEN;
     ws.addEventListener('message', ev => {
       if (typeof ev.data === 'string') {
-        const msg = JSON.parse(ev.data);
+        const msg: Msg = JSON.parse(ev.data);
         for (const mode of Object.keys(onmessage)) {
           onmessage[mode as Mode](msg);
         }
       } else {
-        ondata(ev.data);
+        ondata && ondata(ev.data);
       }
     });
     
     ondata = null;
-    onmessage = {};
     const modes: Mode[] = [];
 
     if (mode.includes('mse') && ('MediaSource' in window || 'ManagedMediaSource' in window)) {
@@ -63,8 +67,7 @@ const useStream = (stream: string, server: string, videoRef: RefObject<HTMLVideo
   }
 
   const onmse = () => {
-    let ms: MediaSource;
-    ms = new MediaSource();
+    let ms = new MediaSource();
     ms.addEventListener('sourceopen', () => {
       URL.revokeObjectURL(videoRef.current!.src);
       send({ type: 'mse', value: codecs(MediaSource.isTypeSupported) });
@@ -135,6 +138,12 @@ const useStream = (stream: string, server: string, videoRef: RefObject<HTMLVideo
     })
   }
 
+  const pause = () => {
+    if (!videoRef.current!.paused) {
+      videoRef.current!.pause();
+    }
+  }
+
   // msg to server via WebSocket
   const send = (value: { type: string, value: string }) => {
     if (ws) ws.send(JSON.stringify(value));
@@ -146,7 +155,7 @@ const useStream = (stream: string, server: string, videoRef: RefObject<HTMLVideo
       .filter(codec => isSupported(`video/mp4; codecs="${codec}"`)).join();
   };
 
-  return [ onConnect ];
+  return [ connect, play, pause, paused ];
 }
 
 export default useStream;

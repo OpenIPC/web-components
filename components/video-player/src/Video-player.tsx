@@ -3,23 +3,23 @@ import { useState, useEffect, useRef } from 'preact/hooks';
 import useStream from './useStream';
 
 const OIPCVideoPlayer = ({ stream, server, live }: PlayerProps) => {
-  const [ paused, setPaused ] = useState(true);
   const [ muted, setMuted ] = useState(true);
   const [ fulled, setFulled ] = useState(false); 
-  const [ finite, setFinite ] = useState(false);
   
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [ onConnect ] = useStream(stream, server, videoRef);
+  const [ connect, play, pause, paused ] = useStream(stream, server, videoRef);
 
   useEffect(() => {
-    onConnect();
+    connect();
   }, []);
 
   const timeStamp = '1:35:12 / 2:44:58';
 
   const handlePlayBtnClick = () => {
-    setPaused(!paused);
+    paused
+      ? play()
+      : pause();
   }
 
   return (
@@ -43,16 +43,16 @@ const OIPCVideoPlayer = ({ stream, server, live }: PlayerProps) => {
                 : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="#fff"><path d="M14,19H18V5H14M6,19H10V5H6V19Z" /></svg>
             }
           </div>
-          {
-            live &&
-              <div>
-                <span className="font-bold pl-1 text-white align-middle">LIVE</span>
-              </div>
-          }
           <div className="ml-auto flex flex-row gap-x-2">
-            <div className="text-white text-sm">
-              <span className="align-middle">{timeStamp}</span>
-            </div>
+            {
+              live
+                ? <div>
+                    <span className="font-bold pl-1 text-white align-middle">LIVE</span>
+                  </div>
+                : <div className="text-white text-sm">
+                    <span className="align-middle">{timeStamp}</span>
+                  </div>
+            }
             <div className="w-min flex flex-row items-center gap-x-[2px]">
               {
                 muted
@@ -64,7 +64,7 @@ const OIPCVideoPlayer = ({ stream, server, live }: PlayerProps) => {
                 </div>
               </div>
             </div>
-            <div className="w-min">
+            <div className="w-min self-center">
               {
                 fulled
                   ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="#fff"><path d="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z" /></svg>
