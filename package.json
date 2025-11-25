@@ -19,7 +19,7 @@
   },
   "type": "module",
   "homepage": "https://github.com/openipc/web-components",
-  "packageManager": "yarn@4.5.3",
+  "packageManager": "yarn@4.12.0",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
     "@storybook/addon-essentials": "^8.4.7",
