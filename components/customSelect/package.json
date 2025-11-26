@@ -1,7 +1,7 @@
 {
   "name": "@openipc/header",
   "version": "0.0.1",
-  "description": "Base OpenIPC web ecosystem header",
+  "description": "OpenIPC web ecosystem custom select component",
   "type": "module",
   "exports": {
     ".": {
@@ -29,6 +29,6 @@
     "@openipc:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "preact": "^10.25.0"
+    "preact": "^10.27.2"
   }
 }

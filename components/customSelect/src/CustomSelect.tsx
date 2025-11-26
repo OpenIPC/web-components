@@ -1,12 +1,7 @@
-import type { SelectProps } from './select-types';
-//import Icons from '../../../../assets/icons/ui';
+import type { SelectProps } from './types';
 import {useEffect, useRef, useState} from 'preact/hooks';
-import '../../../global.css';
 
 export default function CustomSelect({ state, value, onChange, options, open, size, elemName, label, description }: SelectProps) {
-
-  //const { ArrowDown } = Icons;
-
   const [isOpen, setOpen] = useState(open ?? false);
   const [display, setDisplay] = useState(value);
   const valueInput = useRef<HTMLInputElement>(null);
