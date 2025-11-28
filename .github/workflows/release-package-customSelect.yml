@@ -1,4 +1,4 @@
-name: Node.js Package
+name: OIPC customSelect package
 
 on:
   release:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./header
+        working-directory: ./customSelect
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,8 +24,8 @@ jobs:
       - name: Upload package articfact
         uses: actions/upload-artifact@v4
         with:
-          name: header-build
-          path: ./header/dist
+          name: customSelect-build
+          path: ./customSelect/dist
   publish:
     needs: build
     runs-on: ubuntu-latest

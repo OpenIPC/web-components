@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "OpenIPC web ecosystem custom select component",
   "type": "module",
+  "scripts": {
+    "build": "tsup ./src/index.ts"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
