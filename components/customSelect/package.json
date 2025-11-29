@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "cp ../../tsconfig.components.json ./ && tsc -p tsconfig.components.json; rm -f tsconfig.components.json",
+    "lint": "eslint --fix",
     "build": "tsup ./src/index.ts"
   },
   "exports": {
