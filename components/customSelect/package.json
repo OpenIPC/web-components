@@ -4,6 +4,7 @@
   "description": "OpenIPC web ecosystem custom select component",
   "type": "module",
   "scripts": {
+    "typecheck": "cp ../../tsconfig.components.json ./ && tsc -p tsconfig.components.json; rm -f tsconfig.components.json",
     "build": "tsup ./src/index.ts"
   },
   "exports": {
